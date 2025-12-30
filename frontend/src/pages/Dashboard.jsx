@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar.jsx";
 import TaskCard from "../components/TaskCard.jsx";
 import TaskForm from "../components/TaskForm.jsx";
+import TaskDetailModal from "../components/TaskDetailModal.jsx";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 const API_URL = "http://localhost:5000/api/tasks";
 
@@ -10,6 +11,7 @@ const Dashboard = () => {
     const [tasks, setTasks] = useState([]);
     const [editingTask, setEditingTask] = useState(null);
     const [showForm, setShowForm] = useState(false);
+    const [viewingTask, setViewingTask] = useState(null);
     const [filters, setFilters] = useState({
         priority: "",
         dueDate: "",
@@ -162,6 +164,13 @@ const Dashboard = () => {
                 />
             )}
 
+            {viewingTask && (
+                <TaskDetailModal
+                    task={viewingTask}
+                    onClose={() => setViewingTask(null)}
+                />
+            )}
+
             <DragDropContext onDragEnd={handleDrag}>
                 <div className="max-w-[1600px] mx-auto px-6 py-6">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -198,6 +207,7 @@ const Dashboard = () => {
                                                             >
                                                                 <TaskCard
                                                                     task={task}
+                                                                    onView={() => setViewingTask(task)}
                                                                     onEdit={() => {
                                                                         setEditingTask(task);
                                                                         setShowForm(true);

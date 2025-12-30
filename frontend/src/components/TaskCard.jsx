@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 
-const TaskCard = ({ task, onEdit, onDelete }) => {
+const TaskCard = ({ task, onView, onEdit, onDelete }) => {
     const { title, description, priority, status, dueDate, createdAt } = task;
 
     const priorityStyles =
@@ -8,7 +8,7 @@ const TaskCard = ({ task, onEdit, onDelete }) => {
             ? "bg-red-50 text-red-700 border-red-200"
             : priority === "Medium"
                 ? "bg-amber-50 text-amber-700 border-amber-200"
-                : "bg-emerald-50 text-emerald-700 border-emerald-200";
+                : "bg-emerald-200 text-emerald-700 border-emerald-300";
 
     const statusStyles =
         status === "Completed"
@@ -19,7 +19,7 @@ const TaskCard = ({ task, onEdit, onDelete }) => {
 
     return (
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all duration-200 overflow-hidden">
-            <div className="p-5">
+            <div className="p-5 cursor-pointer" onClick={onView}>
                 <div className="flex items-center justify-between mb-4">
                     <span className={`px-3 py-1.5 text-xs font-semibold rounded-full border ${priorityStyles}`}>
                         {priority}
@@ -56,13 +56,19 @@ const TaskCard = ({ task, onEdit, onDelete }) => {
             <div className="flex gap-2 p-4 bg-gray-50 border-t border-gray-100">
                 <button
                     className="flex-1 px-4 py-2.5 text-sm font-semibold text-blue-600 bg-white border border-blue-200 rounded-lg hover:bg-blue-50 transition"
-                    onClick={onEdit}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        onEdit();
+                    }}
                 >
                     Edit
                 </button>
                 <button
                     className="flex-1 px-4 py-2.5 text-sm font-semibold text-red-600 bg-white border border-red-200 rounded-lg hover:bg-red-50 transition"
-                    onClick={onDelete}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        onDelete();
+                    }}
                 >
                     Delete
                 </button>
