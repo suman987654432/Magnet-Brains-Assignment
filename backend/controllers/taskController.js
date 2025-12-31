@@ -1,6 +1,6 @@
 const Task = require("../models/taskModel");
 
-// GET all tasks for a specific user
+// GET all tasks 
 exports.getAllTasks = async (req, res) => {
   try {
     const { userId } = req.query;

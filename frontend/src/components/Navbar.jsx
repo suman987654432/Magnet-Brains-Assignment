@@ -10,14 +10,14 @@ const Navbar = ({
   onSort,
   onSearch,
   onReset,
-  onLogoutSuccess, // Add new prop
+  onLogoutSuccess, 
 }) => {
   const [showTaskForm, setShowTaskForm] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [search, setSearch] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Check if user is logged in on component mount
+  
   useEffect(() => {
     const userId = localStorage.getItem("userId");
     if (userId) {
@@ -25,6 +25,7 @@ const Navbar = ({
       setIsLoggedIn(true);
     }
   }, []);
+
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -36,14 +37,13 @@ const Navbar = ({
     localStorage.removeItem("userId");
     localStorage.removeItem("userEmail");
     alert("Logged out successfully");
-    // Call callback to clear tasks in Dashboard
+    // here we call callback to clear task dashboard
     if (onLogoutSuccess) onLogoutSuccess();
   };
 
   const handleLoginSuccess = () => {
     setIsLoggedIn(true);
     setShowLogin(false);
-    // Trigger task reload after login
     if (onLogoutSuccess) onLogoutSuccess();
   };
 

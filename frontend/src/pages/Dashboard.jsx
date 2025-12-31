@@ -19,11 +19,8 @@ const Dashboard = () => {
         search: "",
     });
     const [sortBy, setSortBy] = useState("");
-
-    // Add a state to force re-render on login/logout
     const [authChange, setAuthChange] = useState(0);
 
-    // Fetch tasks from API - only for logged-in user
     const loadTasks = async () => {
         try {
             const userId = localStorage.getItem("userId");
@@ -49,9 +46,12 @@ const Dashboard = () => {
         }
     };
 
+
+
     useEffect(() => {
         loadTasks();
-    }, [authChange]); // Reload when authChange updates
+    }, [authChange]);
+
 
     // Delete Task
     const deleteTask = async (id) => {
@@ -64,13 +64,13 @@ const Dashboard = () => {
                 return;
             }
             alert("Task deleted successfully");
-            // Reload tasks from API instead of filtering locally
             loadTasks();
         } catch (err) {
             console.error("Delete failed", err);
             alert("Error deleting task");
         }
     };
+
 
     // Drag & Drop
     const handleDrag = async (result) => {
@@ -93,7 +93,8 @@ const Dashboard = () => {
         }
     };
 
-    // Filtering and Sorting
+
+
     const TaskProcess = () => {
         let result = [...tasks];
 
@@ -127,6 +128,7 @@ const Dashboard = () => {
         return result;
     };
 
+
     // Handle filter/sort from Navbar
     const handleFilter = (type, value) => {
         setFilters((prev) => ({ ...prev, [type]: value }));
@@ -139,7 +141,7 @@ const Dashboard = () => {
     };
 
     const handleAuthChange = () => {
-        setAuthChange(prev => prev + 1); // Trigger reload
+        setAuthChange(prev => prev + 1);
     };
 
     return (

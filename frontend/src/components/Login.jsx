@@ -7,6 +7,8 @@ const Login = ({ onClose, onLoginSuccess }) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+
+
   const handleLogin = async () => {
     if (!input.email || !input.password) {
       alert("Please enter email and password");
@@ -19,21 +21,19 @@ const Login = ({ onClose, onLoginSuccess }) => {
         body: JSON.stringify(input),
       });
       const data = await res.json();
-      // Debug: log status and response
+  
       console.log("Login response status:", res.status);
       console.log("Login response data:", data);
       if (!res.ok) {
         alert(data.message || "Login failed");
         return;
       }
-      // Store user info in localStorage
       localStorage.setItem("userId", data.userId);
       localStorage.setItem("userEmail", input.email);
       alert(data.message);
-      if (onLoginSuccess) onLoginSuccess(); // <-- call after successful login
+      if (onLoginSuccess) onLoginSuccess(); 
       onClose();
     } catch (err) {
-      // Debug: log error
       console.error("Login error:", err);
       alert("Error logging in");
     }
