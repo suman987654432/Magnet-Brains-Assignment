@@ -5,7 +5,7 @@ import TaskCard from "../components/TaskCard.jsx";
 import TaskForm from "../components/TaskForm.jsx";
 import TaskDetailModal from "../components/TaskDetailModal.jsx";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-const API_URL = "http://localhost:5000/api/tasks";
+const API_URL = "https://magnet-brains-assignment.onrender.com/api/tasks";
 
 const Dashboard = () => {
     const [tasks, setTasks] = useState([]);

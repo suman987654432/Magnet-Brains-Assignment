@@ -44,8 +44,8 @@ const TaskForm = ({ editingTask, onSave }) => {
 
         try {
             const url = editingTask
-                ? `http://localhost:5000/api/tasks/${editingTask._id}`
-                : "http://localhost:5000/api/tasks";
+                ? `https://magnet-brains-assignment.onrender.com/api/tasks/${editingTask._id}`
+                : "https://magnet-brains-assignment.onrender.com/api/tasks";
 
             const method = editingTask ? "PUT" : "POST";
 

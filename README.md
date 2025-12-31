@@ -4,7 +4,7 @@ A full-stack Task Management System with priority-based organization and user au
 
 ## 🚀 Deployment
 
-**Live Demo:** [Add your deployment link here]
+**Live Demo:** https://magnet-brains-assignment.vercel.app/
 
 ## ✨ Features
 
